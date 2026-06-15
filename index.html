@@ -322,6 +322,115 @@
                 font-size: 0.8rem;
             }
         }
+
+        /* Botão de Créditos */
+        .creditos-btn {
+            margin-top: 1rem;
+            background-color: #c9a882;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            font-weight: 600;
+        }
+
+        .creditos-btn:hover {
+            background-color: #b89470;
+            transform: translateY(-2px);
+        }
+
+        .creditos-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: #faf6f1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2rem;
+            border: 2px solid #c9a882;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h2 {
+            color: #7d6b5f;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .modal-content p {
+            color: #4a4a4a;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        .close {
+            color: #8b7355;
+            float: right;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #7d6b5f;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .modal-content h2 {
+                font-size: 1.2rem;
+            }
+
+            .modal-content p {
+                font-size: 0.95rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -329,7 +438,6 @@
     <header>
         <h1>Studio Miniaturas</h1>
         <p>Maquetes artesanais feitas sob medida com carinho</p>
-        <p>trabalho insano de Vinicius Ribeiro, Isaque Ribeiro e Lucas augusto</p>
     </header>
 
     <main>
@@ -416,9 +524,42 @@
         </div>
     </section>
 
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <button class="creditos-btn" onclick="abrirCreditos()">Resenhudos</button>
+    </div>
+
+    <div id="creditosModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharCreditos()">&times;</span>
+            <p>Trabalho de:</p>
+            <p><strong>Vinicius Ribeiro</strong><br>
+            <strong>Isaque Ribeiro</strong><br>
+            <strong>Lucas Augusto</strong></p>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 Studio Miniaturas. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        // Funções para controlar o modal de créditos
+        function abrirCreditos() {
+            document.getElementById("creditosModal").style.display = "block";
+        }
+
+        function fecharCreditos() {
+            document.getElementById("creditosModal").style.display = "none";
+        }
+
+        // Fechar o modal ao clicar fora dele
+        window.onclick = function(event) {
+            var modal = document.getElementById("creditosModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
