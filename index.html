@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ateliê de Maquetes</title>
+    <style>
+        /* Estilos Globais em Cores Pastéis Marrom */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f1eb; /* Bege muito clarinho e suave */
+            color: #4a4a4a;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #e8dcc4; /* Bege quente pastel */
+            width: 100%;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        header h1 {
+            margin: 0;
+            color: #7d6b5f; /* Marrom acinzentado pastel */
+            font-size: 2.5rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            color: #8e8d8a;
+            font-size: 1.1rem;
+        }
+
+        main {
+            max-width: 550px;
+            width: 90%;
+            margin: 2rem 1rem;
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid #ede5d9;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 1.2rem;
+                margin: 1.5rem 0.5rem;
+            }
+        }
+
+        h2 {
+            color: #7d6b5f;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* Campos do Formulário */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #8b7355;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #dab896;
+            border-radius: 8px;
+            background-color: #fdf9f4;
+            font-size: 1rem;
+            color: #4a4a4a;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Feedback visual fofo quando clica no campo */
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #c9a882; /* Marrom pastel */
+        }
+
+        @media (max-width: 768px) {
+            input[type="text"],
+            input[type="email"],
+            select,
+            textarea {
+                padding: 0.7rem;
+                font-size: 16px;
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Botão de Enviar */
+        button {
+            width: 100%;
+            background-color: #d4c4a8; /* Marrom pastel claro */
+            color: #4a4a4a;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #c9b89d; /* Marrom um pouquinho mais escuro ao passar o mouse */
+        }
+
+        @media (max-width: 768px) {
+            button {
+                padding: 0.9rem;
+                font-size: 1rem;
+            }
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Seção de Galeria */
+        .galeria {
+            max-width: 900px;
+            width: 90%;
+            margin: 2rem 1rem;
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid #ede5d9;
+        }
+
+        @media (max-width: 768px) {
+            .galeria {
+                padding: 1.2rem;
+                margin: 1.5rem 0.5rem;
+            }
+        }
+
+        .galeria h2 {
+            color: #7d6b5f;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .grid-galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-galeria {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        .item-galeria {
+            background: linear-gradient(135deg, #ede1d0 0%, #e8dcc4 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .item-galeria:hover {
+            transform: translateY(-5px);
+        }
+
+        .item-galeria h3 {
+            color: #7d6b5f;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .item-galeria p {
+            color: #8b7355;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .item-galeria {
+                padding: 1rem;
+            }
+
+            .item-galeria h3 {
+                font-size: 1rem;
+            }
+
+            .item-galeria p {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Seção de Depoimentos */
+        .depoimentos {
+            max-width: 900px;
+            width: 90%;
+            margin: 2rem 1rem;
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid #ede5d9;
+        }
+
+        @media (max-width: 768px) {
+            .depoimentos {
+                padding: 1.2rem;
+                margin: 1.5rem 0.5rem;
+            }
+        }
+
+        .depoimentos h2 {
+            color: #7d6b5f;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .grid-depoimentos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-depoimentos {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .depoimento {
+            background-color: #faf6f1;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #c9a882;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .depoimento {
+                padding: 1rem;
+            }
+        }
+
+        .depoimento p {
+            color: #4a4a4a;
+            font-style: italic;
+            margin: 0 0 1rem 0;
+            line-height: 1.6;
+        }
+
+        .depoimento .autor {
+            color: #8b7355;
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        .estrelas {
+            color: #ffd700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 1rem 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Studio Miniaturas</h1>
+        <p>Maquetes artesanais feitas sob medida com carinho</p>
+        <p>trabalha insano de Vinicius Ribeiro, Isaque Ribeiro e Lucas augusto</p>
+    </header>
+
+    <main>
+        <h2>Encomende sua Maquete</h2>
+        
+        <form action="https://formspree.io/f/xyzabc123" method="POST">
+            <div class="form-group">
+                <label for="nome">Seu Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Ex: Maria Souza" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Seu E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="Ex: maria@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Tipo de Maquete:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="" disabled selected>Selecione o estilo...</option>
+                    <option value="residencial">Arquitetônica / Residencial</option>
+                    <option value="escolar">Trabalho Escolar / Faculdade</option>
+                    <option value="cenario">Cenários / Colecionáveis Pop</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="mensagem">Detalhes do Pedido:</label>
+                <textarea id="mensagem" name="mensagem" placeholder="Diga o tamanho aproximado, materiais que deseja ou a ideia do seu projeto..." required></textarea>
+            </div>
+
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+    </main>
+
+    <section class="galeria">
+        <h2>Galeria de Trabalhos:</h2>
+        <div class="grid-galeria">
+            <div class="item-galeria">
+                <h3>Casa Contemporânea</h3>
+                <p>Maquete arquitetônica em escala 1:100, com detalhes de interiores.</p>
+            </div>
+            <div class="item-galeria">
+                <h3>Diorama Medieval</h3>
+                <p>Cenário com castelo, figuras articuladas e vegetação realista.</p>
+            </div>
+            <div class="item-galeria">
+                <h3>Escola Modelo</h3>
+                <p>Projeto acadêmico com estrutura completa e paisagismo.</p>
+            </div>
+            <div class="item-galeria">
+                <h3>Loja Pop Art</h3>
+                <p>Réplica decorativa estilo colecionável com iluminação LED.</p>
+            </div>
+            <div class="item-galeria">
+                <h3>Ponte Suspensa</h3>
+                <p>Engenharia miniaturizada com estrutura funcional em MDF.</p>
+            </div>
+            <div class="item-galeria">
+                <h3>Cenário Fantasia</h3>
+                <p>Ambiente temático para RPG com detalhes personalizados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="depoimentos">
+        <h2>⭐ O que Dizem Nossos Clientes</h2>
+        <div class="grid-depoimentos">
+            <div class="depoimento">
+                <div class="estrelas">★★★★★</div>
+                <p>"Adorei minha maquete! Ficou muito melhor do que imaginava. O Studio Miniaturas é muito profissional e dedicado!"</p>
+                <div class="autor">— Arthur tomate azedo</div>
+            </div>
+            <div class="depoimento">
+                <div class="estrelas">★★★★★</div>
+                <p>"Entrega rápida e qualidade impecável. Meu projeto escolar foi elogiado pela professora. Super recomendo!"</p>
+                <div class="autor">— Jeguenane</div>
+            </div>
+            <div class="depoimento">
+                <div class="estrelas">★★★★★</div>
+                <p>"Que atenção ao detalhe! Cada centímetro foi pensado. Estou muito satisfeito com o resultado final."</p>
+                <div class="autor">— Isaque Rabeiro</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Studio Miniaturas. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
